@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            transition: color 0.3s, transform 0.3s;
+          
+        }
+
+        .navbar a:hover {
+            color: #ff6347;
+            transform: translateY(-3px);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e10e4;
+        }
+
+        /* Home Section */
+        .home {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            padding: 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home .welcome-text {
+            flex: 1;
+            max-width: 50%;
+            position: relative;
+        }
+
+        .home .welcome-text h1 {
+            font-size: 48px;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #ff6347;
+            animation: typing 3s steps(30, end) infinite, blink-caret 0.75s step-end infinite;
+        }
+
+        .home .welcome-text p {
+            font-size: 24px;
+            margin: 10px 0 0;
+            opacity: 0;
+            animation: fadeInText 1s ease-in-out 3s forwards;
+        }
+
+        .home .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            animation: fadeInText 1s ease-in-out 4s forwards;
+        }
+
+        .home .social-icons a {
+            color: #fff;
+            font-size: 24px;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .home .social-icons a:hover {
+            color: #ff6347;
+            transform: translateY(-5px);
+        }
+
+        .home .profile-photo {
+            flex: 1;
+            max-width: 50%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .home .profile-photo img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 50%;
+            border: 5px solid #ff6347;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 20px;
+            background-color: #262626;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff6347;
+        }
+
+        .about p {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 100px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .projects h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #ff6347;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .projects .project-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .projects .project-item {
+            background-color: #262626;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .projects .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .projects .project-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ff6347;
+        }
+
+        .projects .project-item p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 20px;
+            background-color: #262626;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #ff6347;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact form input, .contact form textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .contact form input:focus, .contact form textarea:focus {
+            background-color: #444;
+        }
+
+        .contact form button {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact form button:hover {
+            background-color: #e5533d;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: #ff6347;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #e5533d;
+        }
+
+        /* Animations */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff6347; }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Yinguissa.</div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="welcome-text">
+            <h1>Hello, it's Me Yinguissa Barry</h1>
+            <p> am a passionate developer, specializing in mobile application development and Spring Boot</p>
+            <div class="social-icons">
+                <a href="https://github.com/Yinguissa" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/alpha-ibrahima-yinguissa-barry-97a234262/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/ibrahimstyfleur.barry.1" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+        <div class="profile-photo">
+            <img src="maphoto.JPEG" alt="Ma Photo">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About me</h2>
+        <p>
+            Hi, I'm Barry, a passionate mobile application developer 
+            and Spring Boot backend developer. I specialize in building efficient, scalable, and user-friendly applications. With expertise in Flutter for mobile development and Spring Boot for backend systems,
+             I enjoy turning ideas into powerful digital solutions. </p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2>MY Projects</h2>
+        <div class="project-grid">
+            <div class="project-item" onclick="animateProject(this)">
+                <h3>CNT Human Resource Management System(Guinea)</h3>
+                <p>I developed a Java Swing desktop application for managing human resources at the Conseil National de la Transition (CNT). The system allows efficient management of employee records, contracts, leave requests, and department assignments. It features an intuitive user interface, database integration with MySQL, 
+                    and role-based access control to ensure data security..</p>
+            </div>
+            <div class="project-item" onclick="animateProject(this)">
+                <h3>Delivery parcel and marchandises transportation app</h3>
+                <p>I developed a Flutter-based delivery app for e-Cash, designed to facilitate parcel and merchandise transportation. The app enables users to book deliveries, track shipments in real time, and manage transactions securely. It features a user-friendly interface, GPS tracking, payment integration, and order history management, ensuring a seamless delivery experience. This project
+                     enhanced logistics efficiency and streamlined the shipping process for businesses and individuals.</p>
+            </div>
+            <div class="project-item" onclick="animateProject(this)">
+                <h3>Maaliando – Tontine Management App</h3>
+                <p>I developed Maaliando, a tontine management application designed to simplify and digitalize traditional group savings. Built with Flutter, the app allows users to create and join savings groups, track contributions, manage payouts, and receive notifications. With a secure authentication system and a user-friendly interface, Maaliando ensures transparency and efficiency in community-based financial management. This project 
+                    aimed to modernize informal savings practices and provide a reliable financial tool for users.</p>
+            </div>
+        </div>
+    </section>
+    <section id="projects" class="projects">
+  
+        <div class="project-grid">
+            <div class="project-item" onclick="animateProject(this)">
+                <h3>Postgraduate Student Management System – Gamal Abdel Nasser University(Guinea-SEAG)</h3>
+                <p>I worked on developing a database system for the Advanced Studies Department at Gamal Abdel Nasser University. The project aimed to create an efficient system for managing master's and PhD students. It included features for student records management, enrollment tracking, academic progress monitoring, and administrative operations, ensuring a seamless and organized postgraduate student management process.</p>
+            </div>
+            <div class="project-item" onclick="animateProject(this)">
+                <h3>Stock and Delivery Management System – eCash</h3>
+                <p>I developed a mobile application in Flutter for eCash, designed to facilitate the management of stock and deliveries. The system allowed businesses to track product entries and exits, manage inventory levels, and streamline the delivery process. It provided a user-friendly
+                     interface for real-time monitoring, ensuring efficient logistics and stock management.
+
+
+                </div>
+            <div class="project-item" onclick="animateProject(this)">
+                <h3>Bank Management System – Spring Boot</h3>
+                <p>I developed a Bank Management System using Spring Boot, designed to handle core banking operations efficiently. The system includes features for account creation, deposit and withdrawal transactions, and account deletion. It ensures secure and seamless financial transactions while maintaining a structured and scalable backend architecture. This project enhances digital banking solutions by providing a reliable and user-friendly system for financial institutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2023 [Alpha Ibrahima Yinguissa].All rights reserved. | <a href="#home">Back to home</a></p>
+    </div>
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script>
+        // Animation for project items
+        function animateProject(element) {
+            element.classList.add('clicked');
+            setTimeout(() => {
+                element.classList.remove('clicked');
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
